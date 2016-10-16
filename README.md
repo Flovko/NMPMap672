@@ -1,6 +1,6 @@
 # Francisco Lovko's Map672 Modules
 ## My Learning Objectives
-    •Learn to streamline workflow from Github
+    •Learn to streamline workflow between Github
      to Brackets
     •Become proficient in HTML, CSS, and JS.
     •Have the ability to recognize and correct
