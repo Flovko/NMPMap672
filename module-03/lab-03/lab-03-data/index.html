@@ -86,6 +86,7 @@
 
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    
     <script>
         var map;
         var targetDiv = 'map';
@@ -98,8 +99,8 @@
         
         var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, 
-	    <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; 
-	    <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	        <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; 
+            <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             minZoom: 1,
             maxZoom: 16,
