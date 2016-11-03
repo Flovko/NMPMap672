@@ -95,22 +95,52 @@
 });
 		// add tiles to map
         map.addLayer(tiles);
-            
-		// variable to hold string value of city name
-		var cityName = "Denver";
-		
-		// variable to hold number value of city population
-		var cityPopulation = 649495;
-        
-		// build a string with HTML tags and content
-        var popup = "<b>" + cityName + "</b><br>" +
-                    "<b>population</b>: " + cityPopulation;
 
-        // create a Leaflet marker at the coordinates of Denver, CO
+        var cities = ["Berlin", "San Jose De Minas", "Buena Park"];
+        
+        var cityPops = [3469849, 7243, 80530]
+        console.log(cityPop)
+        var cityCapital = [true, false, false]
+
+        // build a string with HTML tags and content
+        var popup = "<b>" + cityName + "</b><br>" +
+                  "<b>population</b>: " + cityPopulation;
+        
+        var cityCoords = [
+            [52.5200, -13.4050], 
+            [0.1666, -78.4166], 
+            [33.8675, -117.9981]
+            ];
+        
+        // create a Leaflet marker at the coordinates of the cities
 		// add it to the map
 		// and bind the popup content to the marker.
-        L.marker([39.74, -104.99]).addTo(map)
+        L.marker(cityCoords).addTo(map)
 			.bindPopup(popup);
+        
+//        
+        
+//     commented out per lab instructions
+//        
+//		// variable to hold string value of city name
+//		var cityName = "Denver";
+//		
+//		// variable to hold number value of city population
+//		var cityPopulation = 649495;
+//        
+//		// build a string with HTML tags and content
+//        var popup = "<b>" + cityName + "</b><br>" +
+//                    "<b>population</b>: " + cityPopulation;
+//        
+//         var cityCoords = [39.74, -104.99]; // line written above L.marker
+//        
+//      // create a Leaflet marker at the coordinates of Denver, CO
+//		// add it to the map
+//		// and bind the popup content to the marker.
+//        L.marker(cityCoords).addTo(map)
+//			.bindPopup(popup);
+//        
+        
               
     </script>
     
