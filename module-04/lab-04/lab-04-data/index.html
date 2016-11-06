@@ -1,147 +1,187 @@
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
     <meta charset=utf-8 />
     <title>Lab 04 Starter Template</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			background: whitesmoke;
-			font-family: "Noto Sans", sans-serif;
-			color: #3d3d3d;
-		}
-
-    	section {
-			width: 960px;
-			margin: 20px auto;
-		}
-
-		h1 {
-			width: 960px;
-			margin: 20px auto;
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-
-		h2 {
-			font-family: "Lora", serif;
-			letter-spacing: .04em;
-		}
-
-		p {
-			font-size: 1em;
-			line-height: 1.5em;
-		}
-
-		a {
-			color: #005daa;
-      		font-weight: bold;
-			text-decoration: none;
-		}
-
-		a:hover {
-			text-decoration: underline;
-		}
-		#map {
-		  width: 960px;
-		  height: 540px;
-		  margin: 10px auto;
-		  border: 2px solid #d3d3d3;
-		}
-	</style>
-</head>
-
-<body>
-
-	<h1>map title</h1>
-
-    <div id='map'></div>
-
-	<section>
-		
-		<h2>about this map</h2>
-		
-		<p>Map authored by me, MY NAME</p>
-
-		<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
-
-	</section>
-	
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
-    <script>
-
-		// initial map options
-		var options = {
-            center: [0, 0],
-            zoom: 2
+ 
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+                <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+ 
+<style>
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background: whitesmoke;
+        font-family: "Noto Sans", sans-serif;
+        color: #3d3d3d;
+    }
+ 
+    section {
+        width: 960px;
+        margin: 20px auto;
+    }
+ 
+    h1 {
+        width: 960px;
+        margin: 20px auto;
+        font-family: "Lora", serif;
+        letter-spacing: .04em;
+    }
+ 
+    h2 {
+        font-family: "Lora", serif;
+        letter-spacing: .04em;
         }
-		
-		// instantiate Leaflet map object
-        var map = L.map('map', options);
-        
-		// request remote basemap tiles
-		var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-});
-		// add tiles to map
-        map.addLayer(tiles);
+ 
+    p {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+ 
+    a {
+        color: #005daa;
+        font-weight: bold;
+        text-decoration: none;
+    }
+ 
+    a:hover {
+        text-decoration: underline;
+                                }
+    #map {
+        width: 960px;
+        height: 540px;
+        margin: 10px auto;
+        border: 2px solid #d3d3d3;
+    }
+</style>
 
-        var cities = ["Berlin", "San Jose De Minas", "Buena Park"];
+</head>
+ 
+<body>
+ 
+    <h1>Places I enjoy visitng</h1>
+ 
+    <div id='map'></div>
+ 
+    <section>
+                               
+        <h2>About This Map</h2>
+                               
+            <p>Map authored by,<br> Francisco Lovko<br> for MAPS672</p>
+ 
+        <p>The above map has three points plotted on different continents.  The cities on the map have some significant value to me, and might be worth visiting if you have the chance.  The cities include <a href="http://data.un.org/Data.aspx?d=POP&f=tableCode%3a240%3bcountryCode%3a276%3brefYear%3a2015&c=2,3,6,8,10,12,14,16,17,18&s=_countryEnglishNameOrderBy:asc,refYear:desc,areaCode:asc&v=1">Berlin</a>,  <a href="https://www.citypopulation.de/php/ecuador-parish-admin.php?adm2id=170181">San Jose De Minas</a>, and <a href="http://www.census.gov/quickfacts/table/PST045215/0608786">Buena Park</a>.  The hyperlinks in the previous sentence will take viewer directly to the data sources of the information being displayed once the the marker on the map has been clicked.</p>
         
-        var cityPops = [3469849, 7243, 80530]
-        console.log(cityPop)
-        var cityCapital = [true, false, false]
-
-        // build a string with HTML tags and content
-        var popup = "<b>" + cityName + "</b><br>" +
-                  "<b>population</b>: " + cityPopulation;
+    </section>
+               
+        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    
+    <script>
+ 
+    // initial map options
+    var options = {
+        center: [30, -50],
+        zoom: 3
+    }
+                               
+    // instantiate Leaflet map object
+    
+    var map = L.map('map', options);
+       
+    // request remote basemap tiles
+    var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    });
+    // add tiles to map
+    map.addLayer(tiles);
+ 
+    var cities = ["Berlin, Germany", "San Jose De Minas, Ecuador", "Buena Park, California (USA)"];  // cities Array Created
+       
+    var cityCoords = [
+        [52.5206, 13.4050],
+        [0.1666, -78.4166],
+        [33.8675, -117.9981]
+        ];
+     
+       console.log(cityCoords); // twoDArray
+       console.log('coordinates')
+     
+    var cityPops = [3469849, 7243, 80530];  // City populations
+     
+    var cityCapitals = [true, false, false]; // If Capital city Boolean values
         
-        var cityCoords = [
-            [52.5200, -13.4050], 
-            [0.1666, -78.4166], 
-            [33.8675, -117.9981]
-            ];
+    for (var i = 0; i < cities.length; i++) {
+            
+    var cityName = cities[i];
+       
+    var cityPop = cityPops[i]; 
+ 
+    var cityCapital = cityCapitals[i];
+ 
+    var cityAndPop = cityName + ' Population:' + ' ' + cityPop +' ' + 'Capital City:' + cityCapital;
+ 
+    console.log(cityAndPop);
+    
+    }
+    
+    // Marker Popup Info        
+    var Popup0 = "<b>" + cities[0] +"</b><br>"
+                +"<b>population</b>: "+ cityPops[0];
+    
+    if(cityCapitals[0] == true) {
+        Popup0 += "<br>Capital City";      
+        }
         
-        // create a Leaflet marker at the coordinates of the cities
-		// add it to the map
-		// and bind the popup content to the marker.
-        L.marker(cityCoords).addTo(map)
-			.bindPopup(popup);
+    var Popup1 = "<b>" + cities[1] +"</b><br>"
+                +"<b>population</b>: "+ cityPops[1];
+    
+    if(cityCapitals[1] == true) {
+        Popup1 += "<br>Capital City";      
+        }
         
-//        
+    var Popup2 = "<b>" + cities[2] +"</b><br>"
+                +"<b>population</b>: "+ cityPops[2];
+    
+    if(cityCapitals[2] == true) {
+        Popup2 += "<br>Capital City";      
+        }
+      
+    // Leaflet marekrs for the Berlin, San Jose De Minas, and Buena Park
         
+    L.marker(cityCoords[0]).addTo(map)
+     .bindPopup(Popup0);
+        
+    L.marker(cityCoords[1]).addTo(map)
+     .bindPopup(Popup1);
+      
+    L.marker(cityCoords[2]).addTo(map)
+     .bindPopup(Popup2);
+    
 //     commented out per lab instructions
-//        
-//		// variable to hold string value of city name
-//		var cityName = "Denver";
-//		
-//		// variable to hold number value of city population
-//		var cityPopulation = 649495;
-//        
-//		// build a string with HTML tags and content
-//        var popup = "<b>" + cityName + "</b><br>" +
-//                    "<b>population</b>: " + cityPopulation;
-//        
-//         var cityCoords = [39.74, -104.99]; // line written above L.marker
-//        
-//      // create a Leaflet marker at the coordinates of Denver, CO
-//		// add it to the map
-//		// and bind the popup content to the marker.
-//        L.marker(cityCoords).addTo(map)
-//			.bindPopup(popup);
-//        
-        
+//       
+//    // variable to hold string value of city name
+//    var cityName = "Denver";
+//                           
+//    // variable to hold number value of city population
+//    var cityPopulation = 649495;
+//       
+//    // build a string with HTML tags and content
+//    var popup = "<b>" + cityName + "</b><br>" +
+//                "<b>population</b>: " + cityPopulation;
+//       
+//    var cityCoords = [39.74, -104.99]; // line written above L.marker
+//       
+//    // create a Leaflet marker at the coordinates of Denver, CO
+//                            // add it to the map
+//                            // and bind the popup content to the marker.
+//    L.marker(cityCoords).addTo(map)
+//     .bindPopup(popup);     
               
     </script>
-    
+   
 </body>
