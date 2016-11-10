@@ -116,72 +116,27 @@
 
         var cityCapitals = [true, false, false]; // If Capital city Boolean values
 
+        // loop through the length of our cities
         for (var i = 0; i < cities.length; i++) {
 
-            var cityName = cities[i];
+            // build popup content, accessing values within arrays
+            var cityAndPop = "<b>" + cities[i]; + "</b><br>" +
+                            ' Population:' + ' ' + cityPops[i].toLocaleString();
 
-            var cityPop = cityPops[i];
+            // if the capital is a city
+            if(cityCapitals[i] == true) {
+                // add this info to the popup
+                cityAndPop += "<br>Capital City";
+            }
 
-            var cityCapital = cityCapitals[i];
-
-            var cityAndPop = cityName + ' Population:' + ' ' + cityPop + ' ' + 'Capital City:' + cityCapital;
-
-            console.log(cityAndPop);
+            // create a new marker, add it to the map, and bind the popup content
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(cityAndPop);
 
         }
 
-        // Marker Popup Info
-        var Popup0 = "<b>" + cities[0] + "</b><br>" +
-            "<b>population</b>: " + cityPops[0];
 
-        if (cityCapitals[0] == true) {
-            Popup0 += "<br>Capital City";
-        }
 
-        var Popup1 = "<b>" + cities[1] + "</b><br>" +
-            "<b>population</b>: " + cityPops[1];
-
-        if (cityCapitals[1] == true) {
-            Popup1 += "<br>Capital City";
-        }
-
-        var Popup2 = "<b>" + cities[2] + "</b><br>" +
-            "<b>population</b>: " + cityPops[2];
-
-        if (cityCapitals[2] == true) {
-            Popup2 += "<br>Capital City";
-        }
-
-        // Leaflet markers for the Berlin, San Jose De Minas, and Buena Park
-
-        L.marker(cityCoords[0]).addTo(map)
-            .bindPopup(Popup0);
-
-        L.marker(cityCoords[1]).addTo(map)
-            .bindPopup(Popup1);
-
-        L.marker(cityCoords[2]).addTo(map)
-            .bindPopup(Popup2);
-
-        //     commented out per lab instructions
-        //
-        //    // variable to hold string value of city name
-        //    var cityName = "Denver";
-        //
-        //    // variable to hold number value of city population
-        //    var cityPopulation = 649495;
-        //
-        //    // build a string with HTML tags and content
-        //    var popup = "<b>" + cityName + "</b><br>" +
-        //                "<b>population</b>: " + cityPopulation;
-        //
-        //    var cityCoords = [39.74, -104.99]; // line written above L.marker
-        //
-        //    // create a Leaflet marker at the coordinates of Denver, CO
-        //                            // add it to the map
-        //                            // and bind the popup content to the marker.
-        //    L.marker(cityCoords).addTo(map)
-        //     .bindPopup(popup);
     </script>
 
 </body>
