@@ -106,33 +106,77 @@
 
 		// adds these tiles to the map
 		map.addLayer(tiles);
-
-		//    var cities = // write 3 city names as Strings within an array
-		//    var cityCoords = // write a two-dimensional array of the coordinates for each city
-		//    var cityPops = // write the populations of the 3 cities as Numbers within an array;
-		//    var cityAreas = // write the areas of the 3 cities as Numbers within an array;
-
+            
+            var cities = ["Argyle", "Huntington Beach" , "Cape Town"]; // write 3 city names as Strings within an array
+                console.log('cities');
+            
+            var cityCoords = [
+              [43.2379, -73.4915],
+              [33.6603, -117.9992],
+              [-33.9249, 18.4241]
+            ]; 
+            
+              console.log('2DArray') // write a two-dimensional array of the coordinates for each city
+		
+            var cityPops = [3782, 189992, 987007]; // write the populations of the 3 cities as Numbers within an array;
+		      
+            var cityAreas = [150, 82.6 ,2440]; // write the areas in KM sqared of the 3 cities as Numbers within an array;
+        
 		var button = document.getElementById("map-cities");
-
 		button.addEventListener("click", function () {
-
 			var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
-
-			console.log(units);
-
-			// call a function named mapCities, and send the units variable as an argument
-
+			//console.log(units);
+			
+            mapCities(units);// call a function named mapCities, and send the units variable as an argument
 		}); // addEventListener callback function ends here
+		
+        function mapCities(units){
+        
+        // write a function here named mapCities so that it accepts units as a parameter
+             for(var i = 0; i < mapCities.length; i++){
+               
+                console.log(cities)
+             
+              for(var i = 0; i < cityPops.length; i++) {
+                
+                var pops = cityPops[i];
+             
+                var area = cityAreas[i];
+                  
+                calcPopDensity(pops, area, units);
+                  
+                var desnity = calcPopDensity
+                   
+              }
+                 
+             }
+        }
 
-
-		// write a function here named mapCities so that it accepts units as a parameter
-
-
-		// write a function named calcPopDensity here so that it accepts a 
+        function calcPopDensity(pops, area, units) {
+            
+            if(units === "km"){
+                ('density');
+            } else {
+                ('destiny * 0.386102')
+            }
+            
+            var density = (pops / area);
+            
+            console.log(density);
+                      
+            return (density);
+        }
+        
+        
+        
+                
+            
+      // write a function named calcPopDensity here so that it accepts a 
 		// single city's population, area, and the value for units 
 		// determined by the user
 		
-		
+        
+      
 	</script>
 
 </body>
