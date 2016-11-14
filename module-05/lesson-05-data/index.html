@@ -12,32 +12,36 @@
 
 <script>
     
-function doubleNumber(num1, num2) {
-    var n1 = num1 * 2;
+    function doubleNumber(num1, num2) {
+        var n1 = num1 * 2;
     
-    var n2 = num2 * 2;
+        var n2 = num2 * 2;
     
-    var n3 = n1 * n2
-//    console.log(n3);
+        var n3 = n1 * n2
+        
+//        console.log(n3);
     
-    console.log('before return');
-    return [n1, n2];
+          console.log('before return');
+        
+        return [n1, n2];
     
     
-    //    console.log(num1 * num2);
-}    
-var a = 500;
-var b = 60;    
+          console.log(num1 * num2);
+    }    
 
-var result = doubleNumber(a, b);  
+        var a = 500;
+        var b = 60;    
+
+        var result = doubleNumber(a, b);  
     
-console.log(result[1]);
+          console.log(result[1]);
     
-    var myNums = [1,2,3];
+        var myNums = [1,2,3];
     
     function logNumsToConsole(nums){
         
         for(var i = 0; i < nums.length; i++){
+            
             console.log(nums[i]);
             
             doubleNumValue(nums[i]);
@@ -46,125 +50,139 @@ console.log(result[1]);
     }
         
     }
+        
+//   function helloMap(){
+//    
+//    }
+//    
+//        helloMap();
+//        helloMap();
+//        helloMap();
+//        helloMap();
+//    
+//    
+//    function helloMap() {
+//        
+//        console.log("Hello Map");
+//    }
+//  
+//        helloMap();// this statement calls or invokes the helloMap() function!
+//    function helloMap() {
+//   
+//        console.log("Hello Map");
+//    }
+//        helloMap();// console will output Hello Map
+//
+//        helloMap();// console will output Hello Map
+//    
+//        helloMap();// console will output Hello Map
+//    
+//        helloMap(); // this staement calls or invokes the helloMap() Function!
+//
+//    function helloMap(){
+//   
+//        console.log("Hello Map")
+//    }
+//    
+//        var helloMap = function(){
+//    
+//          console.log("Hello Map")
+//
+//    };
+//
+//        helloMap(); // will throw an error
+
+          var helloMap = function() {
+              
+              console.log("Hello Map")
+
+     };
+
+    function outerFunction(message) {
+        
+        console.log(message);
+
+        var innerFunction = function (message) 
+        
+//        console.log(message);
     
-    function doubleNumValue(num) {
-        console.log(num * 2)
     }
     
-    logNumsToConsole(myNums);
+        innerFunction("I'm inside!");
+    }
+        outerFunction("i'm outside!"); 
+
+    function saySomething(message) { // function signature accepts information as a "parameter
+        
+        console.log(message);
+    }
     
-//    
-//doubleNumber(a, b);
+        saySomething("Hello Map")  // function is called, passing an "argument with it"
     
-//    for(var i = 0; i < 5; i++) {
-//        
-//        helloMap();
-//    }
+    function saySomething(message){
+      
+        console.log(message);
+ }
     
-//helloMap();
-//helloMap();
-//helloMap();
-//helloMap();
+
+        saySomething("Hello Map")
+        saySomething("Please enter the address you'd like to search for.")
+
+    function saySomething(message){
     
+        console.log(message);
+
+ } 
+
+        var firstMessage = "Hello Map";
     
-//function helloMap() {
-  // console.log("Hello Map");
-// }
-  //helloMap();// this statement calls or invokes the helloMap() function!
-//function helloMap() {
-//   console.log("Hello Map");
-//    }
-  //helloMap();// console will output Hello Map
-  // helloMap();// console will output Hello Map
-  // helloMap();// console will output Hello Map
+        saySomething(firstMessage);
+
+        var secondMessage = "Please enter the address you'd like to search for"
     
-//  helloMap(); // this staement calls or invokes the helloMap() Function!
+        saySomething(secondMessage)
 
-//function helloMap(){
-//   console.log("Hello Map")
-// }
-
-  //var helloMap = function(){
-  //  console.log("Hello Map")
-
-// };
-
-//  helloMap(); // will throw an error
-
-//  var helloMap = function() {
-//    console.log("Hello Map")
-
-//     };
-
-//function outerFunction(message) {
-//   console.log(message);
-
-//    var innerFunction = function (message) {
-//        console.log(message);
-//    };
-//    innerFunction("I'm inside!");
-//  }
-//  outerFunction("i'm outside!"); 
-
-//function saySomething(message) { // function signature accepts information as a "parameter
-//   console.log(message);
-//}
+    function saySomething(message){
+        
+        console.log(message);
+ }
     
-//  saySomething("Hello Map")  // function is called, passing an "argument with it"
+        var message = "hello map";
     
-// function saySomething(message){
-//      console.log(message);
-// }
+        saySomething(message);
 
-//    saySomething("Hello Map")
-//    saySomething("Please enter the address you'd like to search for.")
+        message = "please enter the adderss you'd like to search for."
+    
+        saySomething(message);
 
-// function saySomething(message){
-//    console.log(message);
+    function calcAreaRect(width, height) {
+   
+        var area = width * height;
+   
+        console.log(area);
 
-// } 
+ }
 
-//    var firstMessage = "Hello Map";
-//    saySomething(firstMessage);
+  calcAreaRect(40,30);
 
-//    var secondMessage = "Please enter the address you'd like to search for"
-//    saySomething(secondMessage)
+ function calcAreaRect(width, height) {
+  var area = width * height;
+  console.log(area)
+ } 
 
-//function saySomething(message){
-//  console.log(message);
-// }
-//    var message = "hello map";
-//    saySomething(message);
+  var width = 40;
+  var height = 30
+  calcAreaRect(width,height);
 
-//    message = "please enter the adderss you'd like to search for."
-//    saySomething(message)
+function calcAreaRect(width,height){ 
+  var area = width * height;
+  console.log(area)
 
-// function calcAreaRect(width, height) {
-//   var area = width * height;
-//   console.log(area)
+} 
 
-// }
-
-//  calcAreaRect(40,30);
-
-// function calcAreaRect(width, height) {
-//  var area = width * height;
-//  console.log(area)
-// } 
-
-//  var width = 40;
-//  var height = 30
-//  calcAreaRect(width,height);
-
-//function calcAreaRect(width,height){ 
-//  var area = width * height;
-//  console.log(area)
-
-//} 
-
-//  var peanutButter = 40;
-//  var jelly = 30
-//  calcAreaRect(peanutButter,jelly);
+  var peanutButter = 40;
+  var jelly = 30
+  calcAreaRect(peanutButter,jelly);
     
   function calcAreaRect(width,height) {
     var area = width * height;
