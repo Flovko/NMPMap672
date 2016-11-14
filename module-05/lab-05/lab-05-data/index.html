@@ -15,7 +15,7 @@
 		body {
 			margin: 0;
 			padding: 0;
-			background: whitesmoke;
+			background: Linen;
 			font-family: "Noto Sans", sans-serif;
 			color: #3d3d3d;
 		}
@@ -43,7 +43,7 @@
 		}
 		
 		a {
-			color: #005daa;
+			color: #1ABC9C;  
 			font-weight: bold;
 			text-decoration: none;
 		}
@@ -67,7 +67,7 @@
 </head>
 
 <body>
-	<h1>map title</h1>
+	<h1>Places I Find Interesting</h1>
 
 	<div id='map'></div>
 
@@ -78,9 +78,9 @@
 
 		<h2>about this map</h2>
 
-		<p>Map authored by me, MY NAME</p>
+		<p>Map authored by,<br> Francisco Lovko<br> Maps672</p>
 
-		<p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
+		<p>The hyperlinks in this paragraph will take the reader directly to the data sources used to author this map.  The plotted points include <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Argyle town, Washington County, New York/ALL">Argyle</a>, New York, <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Huntington Beach city, California/ALL">Huntington Beach</a>, California and <a href=" http://www.localgovernment.co.za/metropolitans/view/6/City-of-Cape-Town-Metropolitan-Municipality#overview">Cape Town</a>, South Africa.</p> 
 
 	</section>
 
@@ -107,7 +107,7 @@
 		// adds these tiles to the map
 		map.addLayer(tiles);
             
-            var cities = ["Argyle", "Huntington Beach" , "Cape Town"]; // write 3 city names as Strings within an array
+            var cities = ["Argyle", "Huntington Beach", "Cape Town"]; // write 3 city names as Strings within an array
                 console.log('cities');
             
             var cityCoords = [
@@ -118,7 +118,7 @@
             
               console.log('2DArray') // write a two-dimensional array of the coordinates for each city
 		
-            var cityPops = [3782, 189992, 987007]; // write the populations of the 3 cities as Numbers within an array;
+            var cityPops = [3782, 189992, 3740026]; // write the populations of the 3 cities as Numbers within an array;
 		      
             var cityAreas = [150, 82.6 ,2440]; // write the areas in KM sqared of the 3 cities as Numbers within an array;
         
@@ -130,24 +130,32 @@
             mapCities(units);// call a function named mapCities, and send the units variable as an argument
 		}); // addEventListener callback function ends here
 		
-        function mapCities(units){
-        
+        function mapCities(units){     
+            
         // write a function here named mapCities so that it accepts units as a parameter
-             for(var i = 0; i < mapCities.length; i++){
+             for(var i = 0; i < cities.length; i++){
                
-                console.log(cities)
-             
-              for(var i = 0; i < cityPops.length; i++) {
+                // console.log("start: " + i);  debugging error
+                 
+                console.log(cities);
                 
                 var pops = cityPops[i];
              
-                var area = cityAreas[i];
+                var area = cityAreas[i]; 
                   
-                calcPopDensity(pops, area, units);
+                var density =  calcPopDensity(pops, area, units); // calling CalcPopDensity funciton
+                 
+                var densityRounded = density.toFixed(2) 
+                 
+                var popup = "<b>" + cities[i] + "</b><br>" +
+                    "<b>Population Density per"+ " " + units + '<sup>2</sup>' + ":" + " " + densityRounded; 
+              
+                L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup);
                   
-                var desnity = calcPopDensity
-                   
-              }
+                // console.log("end: " + i);
+                
+                console.log(density);
                  
              }
         }
@@ -155,28 +163,20 @@
         function calcPopDensity(pops, area, units) {
             
             if(units === "km"){
-                ('density');
-            } else {
-                ('destiny * 0.386102')
+                density;
+            } else if(units === "miles"){
+                area = area * 0.386102;
             }
             
             var density = (pops / area);
-            
-            console.log(density);
                       
-            return (density);
+            return density;
         }
-        
-        
-        
-                
-            
+           
       // write a function named calcPopDensity here so that it accepts a 
 		// single city's population, area, and the value for units 
 		// determined by the user
-		
-        
-      
+    
 	</script>
 
 </body>
