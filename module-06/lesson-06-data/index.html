@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lesson 06 Starter Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+</head>
+
+<body>
+
+
+<script>
+        
+        var myObject = {};  //  declare adn define an empty object
+      
+        console.log(myObject);
+     
+        var iguana = {
+            name:  "Jack",  // a string value
+            weight:  4.2,  // a numeric value, assume kilograms
+            age: 8,
+            eyes: "dreamy", // a string value
+            questForWorldDomination: true // a boolean value
+        }
+      
+        console.log(iguana);
+ 
+        var iguana = {
+            questForWorldDomination: true,
+            age: 8,
+            eyes: "dreamy",
+            name: "Jack",
+            Weight: 4.2,
+            toolkit: {
+                conquestFlag: "red",
+                surrenderFlag: "white",
+                food: true,
+                music: "Anthrax",
+                coolSunGlasses: 8
+            }
+        }
+      
+        console.log(iguana);
+  
+        var iguana = {
+            name:  "Jack",  // a string value
+            weight:  4.2,  // a numeric value, assume kilograms
+            age: 8,
+            eyes: "dreamy", // a string value
+            questForWorldDomination: true // a boolean value
+        } 
+      
+//       console.log(iguana.name);  // output Jack
+//       console.log(iguana.weight)  // output 4.2
+        console.log(iguana["name"]);  // output will be Jack
+        console.log(iguana["weight"]); //output will be 4.2
+     
+        var iguana = {
+            questForWorldDomination: true,
+            age: 8,
+            eyes: "dreamy",
+            name: "Jack",
+            weight: 4.2,
+            toolkit: {
+                conquestFlag: "red",
+                surrenderFlag: "white",
+                food: true,
+                music: "Anthrax",
+                coolSunGlasses: 8
+            }
+        }
+      
+//        console.log(iguana.toolkit.music); // output will be Anthrax
+        console.log(iguana["toolkit"]["music"]); //  output will the Anthrax
+        console.log(iguana["toolkit"].coolSunGlasses); // output will be 8
+    
+        var iguana = {
+            name:  "Jack",  // a string value
+            weight:  4.2,  // a numeric value, assume kilograms
+            age: 8,
+            eyes: "dreamy", // a string value
+            questForWorldDomination: true // a boolean value
+        }
+        
+        console.log(iguana.name);  // output Jack
+        console.log(iguana.weight)  // output 4.2
+      
+        iguana.weight = 5.2;
+        iguana.age = 9;
+ 
+        console.log(iguana.weight); // output 5.2
+        console.log(iguana.age); // output 9
+    
+        var iguana = {
+            name:  "Jack",  // a string value
+            weight:  4.2,  // a numeric value, assume kilograms
+            age: 8,
+            eyes: "dreamy", // a string value
+            questForWorldDomination: true // a boolean value
+        }
+      
+        console.log(iguana.weight);  // output will be 4.2
+        console.log(iguana.age); // 8
+        
+        iguana["weight"] = 6.1
+        iguana["age"] = 10
+      
+        console.log(iguana.weight); // output will be 6.1
+        console.log(iguana.age);  // output will be 10
+    
+        var iguana = {
+            name: "Jack",
+            weight: "4.2",  // assume KG
+            age: 8,
+            eyes: "dreamy",
+            questForGlobalDomination: true
+        }
+ 
+        console.log(iguana); // output entire object for inspection
+    
+        var iguana = {
+          name:  "Jack",  // a string value
+          weight:  4.2,  // a numeric value, assume kilograms
+          age: 8,
+          eyes: "dreamy", // a string value
+          questForWorldDomination: true // a boolean value
+      }
+      console.log(iguana.name);  // output Jack
+      console.log(iguana.weight)  // output 4.2
+     
+  
+      iguana.weight = 5.2;
+      iguana.age = 9;
+ 
+      console.log(iguana.weight); // output 5.2
+      console.log(iguana.age); // output 9
+ 
+      var iguana = {
+          name:  "Jack",  // a string value
+          weight:  4.2,  // a numeric value, assume kilograms
+          age: 8,
+          eyes: "dreamy", // a string value
+          questForWorldDomination: true // a boolean value
+      }
+      console.log(iguana.weight);  // output weight
+      console.log(iguana.age);  // output 8
+     
+      iguana["weight"] = 6.1;
+      iguana["age"] = 10;
+ 
+      console.log(iguana.weight); //  output will be 6.1
+      console.log(iguana.age);  //  output will be 10
+ 
+      var iguana = {
+          name: "Jack",
+          weight: 4.2, // assume KG
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true
+      }
+     
+      console.log(iguana);  //  outputs the entire object
+ 
+      iguana.color = "green";
+      iguana.madGenius = "true";
+ 
+      console.log(iguana); // will see added properites
+ 
+      var iguana = {
+          name: "Jack",
+          weight: 4.2, // assume KG
+          age: 8,
+          eyes: "dreamy",
+          quuestForWorldDomination: true
+      }
+     
+      console.log(iguana);  //  outputs the entire object
+   
+      iguana["color"] = "purple";
+      iguana["unlovedAsBaby"] = true; 
+  
+      console.log(iguana);  //  outputs the entire object
+ 
+//      var MyObject = {};
+//      for(var i = 0; i < someValues.length; i++) {
+//          myObject["id"+i] = someValues[i];
+//      }
+// 
+//      console.log(myObject);
+ 
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  // assume KG
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomiantion: true
+      }
+     
+      for (var key in iguana) {
+          console.log(key);  // output "name", "weight", "age", "eyes", "questForWorldDominatio"
+      }
+     
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  // assume KG
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true
+      }
+     
+      for (var key in iguana) {
+          console.log(iguana[key]);  // output "Jack", 4.2, 8, "dreamy", ture
+      }
+     
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  //  assume KG
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          greeting: function(){
+              console.log("Hello. I am your new overlord.");
+          }
+      }
+     
+      iguana.greeting();
+ 
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          greeting: function(message) {
+              console.log(message);
+          }
+      }
+     
+      iguana.greeting("Howdy there.");  //  output is Howdy there.
+        iguana.greeting("I am your new overlord.");  //  output is I am your new overlord
+     
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  //  KG
+          length: 1.5,  //  meters
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          calculateBMI: function(w,l) {
+              return w / (l*l); // now you know how to calculate BMI
+          }
+      }
+     
+      var result = iguana.calculateBMI(4.2,1.5);
+      console.log(result);  // output 1.87 which is really under weight,
+ 
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  //  KG
+          length: 1.5,  //  meters
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          calculateBMI: function() {
+              var w = this.weight;
+              var l = this.length;
+              return w/(l*l);
+          }
+      }
+     
+      var result = iguana.calculateBMI();
+      console.log(result);  //  output is still 1.87
+
+
+</script>
+    
+</body>
