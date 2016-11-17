@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
  
 <head>
     <meta charset=utf-8 />
@@ -164,4 +165,124 @@
  
     </body>
  
+=======
+
+<head>
+	<meta charset=utf-8 />
+	<title>Web Page Template</title>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+	<style>
+		body {
+			margin: 25px;
+			padding: 0;
+			background: #f5f5f5;
+			font-family: "Noto Sans", sans-serif;
+			color: #3d3de3;
+		}
+		
+		section {
+			width: 960px;
+			margin: 20px auto;
+		}
+		
+		h1 {
+			width: 960px;
+			margin: 20px auto;
+			font-family: Lora, serif;
+			letter-spacing: .04em;
+		}
+		
+		h2 {
+			font-family: Lora, serif;
+			letter-spacing: .04em;
+		}
+		
+		p {
+			font-size: 1em;
+			line-height: 1.5em;
+		}
+		
+		a {
+			color: #00C5CD;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		
+		a:hover {
+			text-decoration: underline;
+		}
+		
+		ul {
+			padding-left: 20px;
+		}
+		
+		li {
+			margin: 10px 0
+		}
+		
+		#map {
+			width: 960px;
+			height: 540px;
+			margin: 10px auto;
+			border: 2px solid #d3d3d3;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<h1>Berkeley, where wearing Birkenstocks and socks is cool</h1>
+	<div id='map'></div>
+
+	<section>
+		<h2>About This Map</h2>
+		
+		<p>Map created by
+			<ul>
+				<li>Francisco Lovko</li>
+				<li>Maps672</li>
+			</ul>
+		
+		<p>Berkeley was an amazing place to live. It is a melting pot of cultures, cuisines and ideas. Walking through town you could run into a nobel laureate or be hassled for money by a <a href="http://www.urbandictionary.com/define.php?term=trustafarian">trustafarian</a>. Located inside the Berkeley city limits there is small mecca for those who boulder(rock climbing without ropes or climbing aides), <a href="http://www.cragmontclimbingclub.org/routes/indianrockmaps">Indian Rock and Mortar Rock</a>. These climbing areas located a few hundered feet apart from each other offer endless bouldering problems and draws an eclectic group of climbers. The bouldering areas offer a cheap alternative to the expensive climbing gyms. Additionally, Berkeley's proximity to San Francisco, Lake Tahoe and Yosemite Valley offeres a plethora activites to those who enjoy the outdoors and city life. The downsides to living in Berkeley/Bay Area are the cost of living and the overly idealist individuals. The one thing that can be said about living in the Berkeley area is that there is never a dull moment and there is always something to do. Not to mention I met the love of my life there.</p>
+		<h3>Reading Response</h3>
+		<p>One of The Cartographic Gaze’s key points is that cartography is “above all, a controlling gaze rendering the broad swathes of worldly complexity and enormity in miniature form for a discrete purpose.” Trying to portray a single complicated social issues and other complex social phenomena on a two dimensional plane such as a piece of paper, computer monitor, or a phone screen distorts the nuances that are responsible for the data being mapped. As a result the audience of a map becomes nearsighted and loses focus of the bigger picture. The problem with this nearsightedness lies in that “the principles of the cartographic gaze have always had political intent and/or consequences.” This kind of power creates a subjective representation of the data being portrayed in a mapped. The dangers in subjectivity occurs when there is only one dominant narrative or only one specific incident being mapped.</p>
+		<p>Akin to Foucault’s Power/Knowledge the information or knowledge that is passed on and reproduced is accepted as fact, which reinforces the institutional power structure. Like most monotheistic religions or dictatorships this creates a top down oligarchy of information. Ideas and information are disseminated from the top tiers. The information being passed down should not be questioned and taken as an unwavering truth. Similarly, digital mapping/mapping also has a top down dissemination structure. In the past maps were produced by professional organizations and agencies and incorporated in well-known and trusted printed media sources and passed down to their readers. With the advent of open sources digital mapping software, maps can be created by anyone interested and doing so. Coupled with the ease of distribution and access to information through social media and the Internet it allows individuals, organizations, and governments to create a validate their narrative by selecting maps, data and reports that support their arguments. At the same time access to information, digital tools, and global connectivity has changed the flow of information to an omnidirectional model. Allowing individuals to challenge the dominant power structure by adding a counter narrative. </p>
+	</section>
+
+
+	<script src = "http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+	<script>
+		var options = {
+			center: [37.8716, -122.2727],
+			zoom: 12
+		}
+
+		var map = L.map('map', options);
+
+		var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+			subdomains: 'abcd',
+			maxZoom: 19
+		}).addTo(map);
+
+		var message = 'Berkeley,CA';
+
+		L.marker(map.getCenter())
+			.bindTooltip(message)
+			.addTo(map)
+			.openTooltip();
+	</script>
+
+
+</body>
+
+>>>>>>> origin/eval-module-02
 </html>

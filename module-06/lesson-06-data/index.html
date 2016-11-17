@@ -271,8 +271,157 @@
      
       var result = iguana.calculateBMI();
       console.log(result);  //  output is still 1.87
+    
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  // KG
+          length: 1.5,  // Meters
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          calculateBMI: function(w,l) {
+              return w/ (l*l);
+          }
+      }
+      var result = iguana.calculateBMI(iguana.weight, iguana.length);
+      console.log(result);   // output is still 1.87
+    
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,  //KG
+          length: 1.5,  //Meters
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          calculateBMI: function() {
+              var w = this.weight;
+              var l = this.length;
+              return w/(l*l);
+          }
+      }
+      var result = iguana.calculateBMI();
+      console.log(result);  // output is 1.86666
+    
+      var iguana = {
+          name: "Jack",
+          weight: 4.2,
+          age: 8,
+          eyes: "dreamy",
+          questForWorldDomination: true,
+          invasionPlans: function(inData) {
+              //  iguana can do something with dta here
+              console.log(inData);
+          } 
+      }
+      
+      var lexData = {
+          lat: 38.23,
+          lon: -89.21,
+          name: "Lexington",
+          pop: 821325
+      }
+      
+      iguana.invasionPlans(lexData);
 
+      var cityName = "Lexington";
+      console.log(cityName);
+      var cityNameWithState = cityName.concat(", KY");  // concat method concatenates two strings
+      console.log(cityNameWithState);  // output is "Leington, Ky"
+    
+      var cityName = "Lexington";
+      var cityNameCaps = cityName.toUpperCase();
+      console.log(cityNameCaps);  // output is LEXINGTON
+    
+      var cityName = "Lexington";
+      console.log(cityName.charAt(4)); //  returns the string
+                                       //  character at index 4 "n"
+      console.log(cityName.indexOf("x"));  //  returns the index(2) of the
+                                           //  first charcater found of "x"
+      var pop = 1200000;
+      var area = 683.24;
+      var density = pop/area;
+    
+      console.log(density);  //  output is 1756.33745.....
+      
+      var output = density.toLocaleString();
+    
+      console.log(output); // output is 1,756.337
+    
+      var cities = ["Lexington", "Bowling Green"];
+      console.log(cities);  // output is ["lexington", "Bowling Green"]
+      cities.push("Frankfort");
+    
+      console.log(cities);  //  output is ["Lexington", "Bowling Green", "Frankfort"]
+      cities.pop();
+      console.log(cities);  //  output is ["Lexington", "Bowling Green"]
+        
+      var iguanas = [ 
+        {
+          name: "Jack",
+          toolkit: {
+            food: true,
+            music: "Diplo",
+            sunglasses: 8  
+              
+          }
+        },   
+        {
+          name: "Jane",
+          toolkit: {
+            food: false,
+            music: "Chemical Brothers",
+            sunglasses: 4      
+              
+          }
+        },
+        {
+          name: "Mary",
+          toolkit: {
+            food: true,
+            music: "Bob Moses",
+            sunglasses: 8
+          }
+        }
+   ];
+    
+   for(var i = 0; i < iguanas.length; i++) {
+//       console.log(iguanas);
+//       console.log(iguanas[i]);
+//       console.log(iguanas[i].name);
+//       console.log(iguanas[i].toolkit.music);
+         var status = checkFood(iguanas[i].toolkit.food, iguanas[i].name);
+         console.log(status);
+   }
+    
+   function checkFood(food, iguana) {
+       
+       if(food === true) {
+           return iguana + " is doing just fine."
+       } else if (food === false) {
+           return iguana + " is running out of food!"
+       }
+   }  
 
+   for(var i = 0; i < iguanas.length; i++) {
+       
+       var tools = iguanas[i].toolkit
+      
+       var status = checkFoodAndSunglasses(tools.food, 
+       iguanas[i].name, tools.sunglasses);
+       console.log(status);
+   }
+       
+   function checkFoodAndSunglasses(food, iguana, glasses) {
+       
+       if(food === true) {
+           return iguana + " is doing just fine and has " + 
+           glasses + " sunglasses."  } 
+       else if (food === false) {
+           return iguana + " is running out of food and has " +  
+           glasses + " sunglasses."
+       }
+   }
+        
 </script>
     
 </body>
