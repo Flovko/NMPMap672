@@ -124,10 +124,12 @@
 
 		 var button = document.getElementById("map-cities");
 		 button.addEventListener("click", function () {
-			var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
-			//console.log(units);
+			 		do{
+							var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+					} while(units != 'miles' && units != 'km')
 
-              mapCities(units);// call a function named mapCities, and send the units variable as an argument
+
+					mapCities(units);// call a function named mapCities, and send the units variable as an argument
 		}); // addEventListener callback function ends here
 
         function mapCities(units){
