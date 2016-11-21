@@ -58,21 +58,37 @@
             margin: 10px auto;
             border: 2px solid #d3d3d3;
         }
+        .yosemite-pink {
+            color: #bf12a8;
+        }   
+
+        .south-africa-yellow {
+            color: #ffd750;
+        }
+
+        .france-red {
+            color: #bc2739;
+/*
+        }
+        .logo {
+            width: 120px;
+            height: 120px;    
+        }           
+*/
     </style>
 </head>
 
 <body>
-    <h1>map title</h1>
+    <h1>Great places to explore</h1>
 
     <div id='map'></div>
 
 
     <section>
 
-        <p>Map authored by me, MY NAME</p>
+        <p>Map authored by,<br>Francisco Lovko<br>For: MAPS672</p>
 
-        <p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus
-            luctus. </p>
+        <p>The hyperlinks included in this paragraph will take the reader directly to the population data sources that were used to author this map. It will include special census data for <a href="http://fhttp://factfinder.census.gov/bkmk/cf/1.0/en/place/Yosemite Valley CDP, California/POPULATION/DECENNIAL_CNT">Yosemite Valley</a>, <a href="http://www.statssa.gov.za/?page_id=1021&id=city-of-cape-town-municipality"> Cape Town</a>, and <a href="http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2013#regions">Normandy</a>.  All three of these places have rich histories to explore.  Yosemite Valley is a case and point of why the National Park Service was created, to preserve and pass on the beauty of wild places to future generations.  South Africa imbues the post-colonial struggle of the African Continent and its progress towards equality. This could not have been achieved without Nelson Mandela’s African National Congress and countless others who sacrificed so much for future generations.  Normandy is a place steeped in history.  Home to the Normans who once controlled England, and the location the Allied Forces selected to launch their invasion to retake Europe back from the Nazis.  Additionally, all these places are surrounded by beautiful landscapes.</p>
 
     </section>
 
@@ -80,9 +96,10 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script>
+        
         var map = L.map('map', {
-            center: [38.96, -85.36],
-            zoom: 8,
+            center: [18.96, -37.36],
+            zoom: 2,
         });
 
         var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
@@ -92,15 +109,84 @@
         map.addLayer(tiles);
 
         // Begin writing/modifying code for Lab 06 here
-
-        var cities = [{
-            name: "Louisville",
+        
+        var cities = [
+            {
+            name: "Yosemite Valley CPD",
             properties: {
-                coordinates: [38.25, -85.7667],
-                population: 756832,
-                state: "KY"
+                coordinates: [37.8651, -119.5383],
+                population: 1035,  // 2010 Census Data
+                state: "California",
+                logo: "images/Yosemite_Logo.jpg",  // courtesy of Draplin Design Co., North America
+                link: "https://www.nps.gov/yose/index.htm"
             }
-        }];
+        },
+        {
+            name: "Cape Town",
+            properties: {
+                coordinates: [-33.9249, 18.4241],
+                population: 3740026,  // 2011 Census Data
+                state: "South Africa",
+                logo: "images/Cape_Town_Logo.jpg",  // courtesy of Ogilvy Cape Town
+                link: "http://www.capetown.travel/"
+            }
+        },
+        {
+            name: "Normandy",
+            properties: {
+                coordinates: [48.8799, 0.1713],
+                population: 3328364,  // 2013 French Census
+                state: "France",
+                logo: "images/Normandy_Logo.jpg",  // courtesy of http://en.normandie-tourisme.fr/
+                link: "http://en.normandie-tourisme.fr/normandy-tourism-1-2.html"
+            }
+        }
+        ];
+            console.log(cities);
+        
+        for (var i = 0; i < cities.length; i++) {
+        //  for loop to loop through the cities
+            var props = cities[i].properties;
+        //  end of the for loop
+//            
+//             log statement within body of for loop
+            console.log(cities[i]);
+//             end of the for loop 
+//            console.log(cities[i].properties);
+//            console.log(cities[i].properties.population);
+            var city = cities[i].name;
+            var pop = props.population;
+            var state = props.state;
+            var logo = props.logo;
+            var link = props.link;
+               
+//          console.log(cities[i].name)
+            
+            var popup = buildPopup(cities[i].name, props.population, props.state,props.logo, props.link);
+            
+            L.marker(props.coordinates).addTo(map)
+                .bindPopup(popup); 
+            
+            }
+       
+        function buildPopup(city, pop, state, logo, link) {
+            
+            if(state == "California") {
+                var colorClass = "yosemite-pink";
+        }
+            if(state == "South Africa") {
+                var colorClass = "south-africa-yellow";
+        }
+            if(state == "France") {
+                var colorClass = "france-red";
+        }    
+            
+            return "<img class='logo' src='"+logo+"'><br>"+
+                   "<div class='"+colorClass+"'><b>"+city+"</b><br>"+
+                   "<b>Population</b>: "+pop.toLocaleString()+"<div>"+
+                   "<a href='"+link+"'>Click here for more Information</a>";
+        } 
+        
     </script>
 
 </body>
