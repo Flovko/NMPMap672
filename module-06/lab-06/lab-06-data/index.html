@@ -60,7 +60,7 @@
         }
         .yosemite-pink {
             color: #bf12a8;
-        }   
+        }
 
         .south-africa-yellow {
             color: #ffd750;
@@ -72,8 +72,8 @@
         }
         .logo {
             width: 120px;
-            height: 120px;    
-        }           
+            height: 120px;
+        }
 */
     </style>
 </head>
@@ -96,7 +96,7 @@
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
     <script>
-        
+
         var map = L.map('map', {
             center: [18.96, -37.36],
             zoom: 2,
@@ -109,7 +109,7 @@
         map.addLayer(tiles);
 
         // Begin writing/modifying code for Lab 06 here
-        
+
         var cities = [
             {
             name: "Yosemite Valley CPD",
@@ -143,34 +143,22 @@
         }
         ];
             console.log(cities);
-        
+
         for (var i = 0; i < cities.length; i++) {
-        //  for loop to loop through the cities
+
             var props = cities[i].properties;
-        //  end of the for loop
-//            
-//             log statement within body of for loop
-            console.log(cities[i]);
-//             end of the for loop 
-//            console.log(cities[i].properties);
-//            console.log(cities[i].properties.population);
+
             var city = cities[i].name;
-            var pop = props.population;
-            var state = props.state;
-            var logo = props.logo;
-            var link = props.link;
-               
-//          console.log(cities[i].name)
-            
+
             var popup = buildPopup(cities[i].name, props.population, props.state,props.logo, props.link);
-            
+
             L.marker(props.coordinates).addTo(map)
-                .bindPopup(popup); 
-            
+                .bindPopup(popup);
+
             }
-       
+
         function buildPopup(city, pop, state, logo, link) {
-            
+
             if(state == "California") {
                 var colorClass = "yosemite-pink";
         }
@@ -179,14 +167,14 @@
         }
             if(state == "France") {
                 var colorClass = "france-red";
-        }    
-            
+        }
+
             return "<img class='logo' src='"+logo+"'><br>"+
                    "<div class='"+colorClass+"'><b>"+city+"</b><br>"+
                    "<b>Population</b>: "+pop.toLocaleString()+"<div>"+
                    "<a href='"+link+"'>Click here for more Information</a>";
-        } 
-        
+        }
+
     </script>
 
 </body>
