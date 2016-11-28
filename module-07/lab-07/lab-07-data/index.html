@@ -70,29 +70,35 @@
 </head>
 
 <body>
-  <h1>This is the title to my awesome map.</h1>
+  <h1>How far are we from Red Iguana?</h1>
 
  <div id='map'></div>
 
  <section>
    <h2>about this map</h2>
 
-   <p>Map authored by me, MY NAME</p>
+   <p>Map authored by<br>Francisco Lovko<br> For: MAPS672</p>
 
-   <p>Additional information about <a href="#">the data</a> and map goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. </p>
+   <p>This was an challen </p>
 
  </section>
 
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-  	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+  	     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script>
 
     var options = {
-        center: [40.74,-110.61],
+        center: [40.7718,-111.9124],
         zoom: 6
     }
 
     var map = L.map('map', options);
+    
+    var tiles = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: 'Map data: &copy;                                                                                                <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,                                              <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy;                                            <a href="https://opentopomap.org">OpenTopoMap</a>                                                                (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        });    
+        map.addLayer(tiles);   
 
     var redIguana = L.latLng(40.7718,-111.9124);
 
@@ -103,14 +109,29 @@
         })
     }).addTo(map);
 
-    map.on('click', function(e){
-
+    var clickPoint = map.on('click', function(e) {  // click event that will pass on values to create marker
         console.log(e.latlng);
+        
+        var point = L.marker(e.latlng, {
+            draggable: true,
+            opacity: .7    
+        }).addTo(map).bindPopup(popup).openPopup();  // marker added to map, popup variable info passed  
+    
+    point.on("dragend", function(e) {
+        console.log(e.target.getLatLng());
 
-    });
-
+    var dragDistance = e.target.getLatLng().distanceTo(redIguana)
+        dragDistance = (dragDistance/1000);
+       
+    var bounds = map.getBounds();
+        console.log(dragDistance);
+    })
+    
+    var popup = point.getPopup().setContent(dragDistance.toLocaleString() + " " + " Kilometers away from Red Iguana.");  
+   
+    });   
+        
     </script>
 
 </body>
-
 </html>

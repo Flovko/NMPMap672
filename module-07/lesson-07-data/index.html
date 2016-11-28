@@ -87,10 +87,156 @@
   	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script>
 
-      // build your Leaflet map here!
+      // build your Leaflet map here! 
+        var map = L.map('map', {
+            center: [51.505, -0.09],
+            zoom: 13
+        });
+        var tiles = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                maxZoom: 17,
+                attribution: 'Map data: &copy;                                                                              <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,                            <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy;                          <a href="https://opentopomap.org">OpenTopoMap</a>                                              (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        });    
+        map.addLayer(tiles);
+             
+        var mapCenter = L.latLng(38.0489, -96.5025);
+        var otherCity = L.latLng(38.1489, -96.5125);
+        var distance = mapCenter.distanceTo(otherCity);
+        console.log(distance);  // will output distance b/w city in meters
+        
+        var options ={
+            center: [38.0489, -96.5025],
+            zoom: 4,  // initial zoom level
+            minZoom: 4,
+            maxZoom: 7
+        }
+      //  var map = L.map('map', options);
+        
+        var options = {
+            center: [38.0489, -96.5025],
+            zoom: 4,  
+            minZoom: 4,
+            maxZoom: 7,
+            dragging: false,
+            zoomControl: false
+        }
+      //  var map = L.map('map', options);
+        
+//        map.on('click', function(e) {
+//            alert(e.latlng);
+//        });
+        
+//        var map = L.map('map');
+        
+        map.on('click', function(e) {
+            console.log(e.latLng);
+        });
+         
+        map.setView([38.0489, -96.5025], 4);
+        
+        var myMarker = L.marker([38.0489, -96.5025], {
+            draggable: true,
+            opacity: .2
+        }).addTo(map);
+        
+        myMarker.on('dragend', function(e) {
+            console.log(e);
+            console.log(myMarker.getLatLng());
+        });
+        
+        
+        var center = map.getCenter();
+        console.log(center);  // return latLng object
+        console.log(center.lat, center.lng)  // outputs the specific latitude and longitude values
+        var zoom = map.getZoom();
+        console.log(zoom);  // returns a number
+        var bounds = map.getBounds();
+        var bottomLeft = bounds.getSouthWest();  //returnds a latLng object
+        console.log(bounds);  // returns a latLngBonds object
+        console.log(bottomLeft. lat, bottomLeft.lng);  // outputs the latLng values
+        
+        L.marker([38.0297, -84.4947]).addTo(map); // places a marker on Lexington
+        
+        var redIguanaLocation = L.latLng(40.7718, -117.9124);
+        var redIguanaMarker = L.marker(redIguanaLocation, {
+            draggable: true,
+//            opacity: .4
+        });
+                
+        redIguanaMarker.addTo(map);
+        redIguanaMarker.bindPopup("Best Mexican food in Salt Lake City!")
+        redIguanaMarker.on('drag', function(e){
+            console.log(e.target.getLatLng());
+        });
 
+//        L.marker([38.0489, -96.5025]).addTo(map).bindPopup(popup);
+        
+//        var redIguanaLocation = L.latLng(40.7718, -111.9124);
+//        var redIguanaCircle = L.circle(redIguanaLocation, 400, {
+//            color: "#d72b1e",  // changes the stroke color
+//            fillColor: "#d72b1e"  // changes the fill color
+//        });
+//        redIguanaCircle.addTo(map);
+        
+        var lexingtonLocation = L.latLng(38.0297, -84.4947);
+        var lexingtonCircle = L.circle(lexingtonLocation, 1000);
+        lexingtonCircle.addTo(map);
+        
+        lexingtonCircle.setStyle({
+            color: "#6897bb", // sets stroke color to black
+            wight: 15, // sets the stroke width to 15 pixels
+            fillColor: "#ff6eb4", // sets fill color to pink
+            fillOpacity: 1 // sets the fill opacity to 1
+        });
+        
+        var richmondLocation = L.latLng(37.7479, -84.2947);
+        var richmondCircle = L.circle(richmondLocation, 1500);
+        console.log(richmondCircle),
+        richmondCircle.addTo(map);
+        
+//        var redIguanaLocation = L.latLng(40.7718, -111.9124);
+//        var redIguanaCircle = L.circle();
+//        redIguanaCircle.setLatLng(redIguanaLocation);
+//        redIguanaCircle.setRadius(400);
+//        redIguanaCircle.addTo(map);
+        
+        var iguanaRestaurants = L.layerGroup();
+        var redIguanaOptions = {
+            color:'red',
+            fillColor: 'red'
+        };
+        var blueIguanaOptions = {
+            color: '#03f',
+            fillColor: '03f'
+        };
+        
+        var redIguana = L.circle([40.7718, -111.9124], 400, redIguanaOptions);
+        redIguana.color = 'red';
+        redIguana.addTo(iguanaRestaurants);
+        var blueIguana = L.circle([40.7657, -111.8930], 300, blueIguanaOptions);
+        blueIguana.color = 'blue';
+        blueIguana.addTo(iguanaRestaurants);
+        iguanaRestaurants.addTo(map);
+        
+        iguanaRestaurants.eachLayer(function(layer){
+            layer.on('mouseover', function(e) {
+                e.target.setStyle({
+                    color: 'yellow',
+                    fillColor: 'yellow'
+                });
+            });
+            
+            layer.on('mouseout', function(e){
+                if(e.target.color == 'red') {
+                    e.target.setStyle(redIguanaOptions);  //returns style to red when mouse is not over red iguana
+                } else if (e.target.color == 'blue') {
+                    e.target.setStyle(blueIguanaOptions);  // returns sytle to blue when user's mouse not over blue iguana
+                }
+            });
+        });
+//            console.log(layer);     
+        
     </script>
-
+        
 </body>
 
 </html>
