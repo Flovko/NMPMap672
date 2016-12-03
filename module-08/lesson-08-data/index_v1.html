@@ -64,16 +64,17 @@
     <script>    
       
         var map = L.map('map', {
-            center: [36, -94],  // centered on Continental US
-        });    
-
-        var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.{ext}', {
-	           attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	           subdomains: 'abcd',
-	           maxZoom: 18,
-	           ext: 'png'    
+          center: [36,-94],
+          zoom: 4,
         });
-        tiles.addTo(map);    
+
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
+
+        tiles.addTo(map);   
             console.log(plants);
         
         L.geoJson(plants, {
@@ -100,6 +101,7 @@
                 if(feature.properties.capacity_mw < 500 && 
                    feature.properties.fuel_source['Petroleum', 'Natural Gas']) {
                 return feature;  // return that feature to be included in the layer group
+                console.log(filter);
                 }
             }
         }).addTo(map);
