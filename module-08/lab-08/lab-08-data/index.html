@@ -82,9 +82,9 @@
             pointToLayer: function(feature,latlng) {
                 //console.log(feature.properties)
                 return L.circleMarker(latlng, {
-                color: '#ffe5eb',
+                color: '#44ec01',
                 weight: 1,
-                fillColor: '#01ec1c',
+                fillColor: '#77fd04',
                 fillOpacity: .8,
                 radius: getRadius(feature.properties.capacity_mw) // returns get radius function        
                 });
@@ -107,14 +107,14 @@
             
             layer.on('mouseover', function() {
                 layer.setStyle({
-                    fillColor:'#77fd04'
+                    fillColor:'#ec3c01'
                 })
             });
               
             layer.on('mouseout', function() {
 //                map.removeLayer(layer);
                 layer.setStyle({
-                    fillColor: '#bddbf6'
+                    fillColor: '#77fd04'
                     })
                 });
             },
