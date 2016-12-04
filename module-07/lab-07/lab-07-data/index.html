@@ -93,12 +93,12 @@
     }
 
     var map = L.map('map', options);
-    
+
     var tiles = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             maxZoom: 17,
             attribution: 'Map data: &copy;                                                                                                <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>,                                              <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy;                                            <a href="https://opentopomap.org">OpenTopoMap</a>                                                                (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-        });    
-        map.addLayer(tiles);   
+        });
+        map.addLayer(tiles);
 
     var redIguana = L.latLng(40.7718,-111.9124);
 
@@ -109,27 +109,35 @@
         })
     }).addTo(map);
 
-    var clickPoint = map.on('click', function(e) {  // click event that will pass on values to create marker
-        console.log(e.latlng);
-        
+    map.on('click', function(e) {  // click event that will pass on values to create marker
+
+        // calculate distance
+        var distance = e.latlng.distanceTo(redIguana)/1000;
+
+        // build popup
+        var popup = distance.toLocaleString() + ' km from red iguana';
+
+        // create marker and make draggable
         var point = L.marker(e.latlng, {
             draggable: true,
-            opacity: .7    
-        }).addTo(map).bindPopup(popup).openPopup();  // marker added to map, popup variable info passed  
-    
-    point.on("dragend", function(e) {
-        console.log(e.target.getLatLng());
+            opacity: .7
+        }).addTo(map).bindPopup(popup).openPopup();  // marker added to map, popup variable info passed
 
-    var dragDistance = e.target.getLatLng().distanceTo(redIguana)
-        dragDistance = (dragDistance/1000);
-       
-        console.log(dragDistance);
-    })
-    
-    var popup = point.getPopup().setContent(dragDistance.toLocaleString() + " " + " Kilometers away from Red Iguana.");  
-   
-    });   
-        
+        // when drag ends
+        point.on("dragend", function(e) {
+
+            // recalculate distance
+            distance = point.getLatLng().distanceTo(redIguana)/1000;
+
+            // update popup info
+            point.getPopup().setContent(distance.toLocaleString() + " " + " Kilometers away from Red Iguana.");
+
+            // open popup
+            point.openPopup();
+        })
+
+    });
+
     </script>
 
 </body>
