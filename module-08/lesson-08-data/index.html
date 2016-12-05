@@ -153,7 +153,10 @@
         var placesLeaflet = L.geoJson(places, {
             pointToLayer: function(feature, latlng) {
                 console.log(feature);
-                return L.circle(latlng, feature.properties.size * 100);
+                return L.circle(latlng, feature.properties.size * 100)
+                
+                fillColor: '#06dbcb'
+                
             }
         }).addTo(map);
             console.log(places);
