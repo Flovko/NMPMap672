@@ -59,23 +59,24 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <script src="power-plants.js"></script> 
-    
-    <script>    
-      
+    <script src="power-plants.js"></script>
+    <script>
+        
+        
+
         var map = L.map('map', {
             center: [36, -94],  // centered on Continental US
+            zoom: 4
         });    
 
-        var tiles = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.{ext}', {
-	           attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	           subdomains: 'abcd',
-	           maxZoom: 18,
-	           ext: 'png'    
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a       href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxzoom: 19
         });
+      
         tiles.addTo(map);    
-            console.log(plants);
-        
+
         L.geoJson(plants, {
             pointToLayer: function(feature, latlng) {
                 return L.circleMarker(latlng, {
@@ -103,8 +104,6 @@
                 }
             }
         }).addTo(map);
-        
-        
         
     </script>
 
