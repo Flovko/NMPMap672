@@ -98,7 +98,7 @@
 //            return radius * .8;
 //        }     
         
-        L.geoJson(plants, {
+        var hydroLayer = L.geoJson(plants, {
             pointToLayer: function(feature,latlng){
                 return L.circleMarker(latlng);
             },
@@ -119,11 +119,58 @@
             }
         }).addTo(map);
         
-           function getRadius(area) {
+        function getRadius(area) {
             var radius = Math.sqrt(area/Math.PI);
             return radius * .8;
         }    
-
+        
+//        hydroLayer.setStyle({
+//            color: '#a5c9e2',
+//            fillColor: '#a5c9e2'
+//        });
+//        hydroLayer.eachLayer(function(layer){
+//            //code goes here
+//            console.log(layer);
+//        });
+//        map.on('click', function(e){
+////            console.log(e.latlng)                   // acces to the click coordinates
+//            hydroLayer.eachLayer(function(layer){
+//                var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+////                console.log(distance);      // distance in meters between click point
+//                                            // and each layer's centroid
+//                if(distance > 500) {
+//                    layer.setStyle({
+//                        stroke: false,
+//                        fill: false
+//                    });
+//                } else {
+//                    layer.setStyle({
+//                        stroke: true,
+//                        fill: true
+//                    });
+//                    layer.bindPopup("I am <b>"+distance.toLocaleString()+
+//                                   "km</b><br> from the click point.")
+//                }
+////                console.log(layer.getLatLng());     // access to the layer coordinates
+//            });   
+//        });
+            
+        onEachFeature: function(feature,layer) {
+            if(feature.properties.source.Coal) {
+                layer.setStyle({
+                    fillColor: 'red',
+                    radius: getRadius(feature.properties.source.Coal)
+                });
+                layer.symbolColor = 'red';
+            } else if(feature.properties.Hydro){
+                layer.setStyle({
+                    fillColor: 'blue',
+                    radius: getRadius(feature.properties.source.Hydro)
+                });
+                layer.symbolColor = blue;
+            }
+            
+    
     </script>
 
 </body>
