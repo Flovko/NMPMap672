@@ -109,8 +109,11 @@
         })
     }).addTo(map);
 
-    var clickPoint = map.on('click', function(e) {  // click event that will pass on values to create marker
+    map.on('click', function(e) {  // click event that will pass on values to create marker
         console.log(e.latlng);
+        var distance = e.latlng.distanceTo(redIguana)/1000;
+        
+        var popup = distance.toLocaleString() + " " + " Kilometers away from Red Iguana."; 
         
         var point = L.marker(e.latlng, {
             draggable: true,
@@ -118,16 +121,12 @@
         }).addTo(map).bindPopup(popup).openPopup();  // marker added to map, popup variable info passed  
     
     point.on("dragend", function(e) {
+        distance = point.getLatLng().distanceTo(redIguana)/1000;
+        point.getPopup().setContent(distance.toLocaleString() + " " + " Kilometers away from Red Iguana.");
         console.log(e.target.getLatLng());
-
-    var dragDistance = e.target.getLatLng().distanceTo(redIguana)
-        dragDistance = (dragDistance/1000);
-       
-        console.log(dragDistance);
-    })
-    
-    var popup = point.getPopup().setContent(dragDistance.toLocaleString() + " " + " Kilometers away from Red Iguana.");  
-   
+        console.log(distance);
+        point.openPopup();
+        })
     });   
         
     </script>
