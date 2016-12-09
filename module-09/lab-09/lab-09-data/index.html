@@ -62,19 +62,95 @@
     <script src="power-plants.js"></script>
     <script>
 
-       var map = L.map('map', {
-          center: [36,-94],
-          zoom: 4,
-      });
+        var map = L.map('map', {
+            center: [36,-94],
+            zoom: 4,
+        });
 
-      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-      });
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });
 
-      tiles.addTo(map);
+        tiles.addTo(map);
+        
+        plants.features.sort(function(a, b) { 
+            return b.properties.capacity_mw - a.properties.capacity_mw;
+        }); 
+         
+        var commonStyles = {
+            weight: 1,
+            stroke: 1,
+            fillOpacity: .8    
+        }
+        
+          var layerInfo = {
+            nuclearLayer: {source:"Nuclear", color:'#9ffb1b'},
+            solarLayer: {source:"Solar", color:'#fbb034'},
+            hydroLayer: {source:"Hydro", color:'#3807d6'}
+        };
+        
+        var geoJsonLayers = {};
+        
+        for(var layer in layerInfo) {
+            console.log(layer, layerInfo[layer]);
+            geoJsonLayers[layer] = L.geoJson(plants, {
+                pointToLayer: function(feature,latlng){
+                return L.circleMarker(latlng,commonStyles);
+            },
+            filter: function(feature) {
+                if(feature.properties.fuel_source[layerInfo[layer].source]){
+                    return feature;
+                }
+            },
+            style: function(feature){
+                return {
+                color: layerInfo[layer].color,
+                fillColor: layerInfo[layer].color,
+                radius: getRadius(feature.properties.fuel_source[layerInfo[layer].source])    
+                }
+            }
+        }).addTo(map);
+        }
+        function getRadius(val) {
+            var radius = Math.sqrt(val/Math.PI);
+            return radius * .8;
+        } 
+        
+        var sourcelabels = {
+            "<b style='color:#9ffb1b'>Nuclear</b>": geoJsonLayers.nuclearLayer,
+            "<b style='color:#fbb034'>Solar</b>": geoJsonLayers.solarLayer,
+            "<b style='color:#3807d6; text-shadow: 0px 0px 1px #333;'>Hydro</b>": geoJsonLayers.hydroLayer
+        }
+        
+        L.control.layers(null, sourcelabels, { collapse:false}).addTo(map);
+        
+        for(var layer in layerInfo){
+        console.log(layer, layerInfo[layer]);    
+        map.on('click', function(e) {
+            geoJsonLayers[layer].eachLayer(function(layer) {
+                var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
 
+                if(distance > 500) {
+                    layer.setStyle({
+                        stroke: false,
+                        fill: false
+                    });  
+                } else {
+                    layer.setStyle({
+                        stroke: true,
+                        fill: true  
+            });  
+            
+            layer.bindPopup("I am <b>"+distance.toLocaleString()+
+                            "km</b><br> from the click point.");
+        }
+    });
+});
+        }
+     
+  
     </script>
 
 </body>
