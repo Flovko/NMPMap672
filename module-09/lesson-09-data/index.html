@@ -133,11 +133,10 @@
         }).addTo(map);
         }
     
-        for(var layer in layerInfo){
-    console.log(layer,layerInfo[layer]);
         map.on('click', function(e) {
-            geoJsonLayers[layer].eachLayer(function(layer) {
-                var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+            for(var l in geoJsonLayers) { 
+                geoJsonLayers[l].eachLayer(function(layer) {
+                var distance = e.latlng.distanceTo(layer.getLatLng())/1000
                 
                 if(distance > 500) {
                     layer.setStyle({
@@ -151,10 +150,10 @@
             });  
             layer.bindPopup("I am <b>"+distance.toLocaleString()+
                             "km</b><br> from the click point.");
-        }
-    });
-});
-        }
+            }
+        });
+            }
+        });
         
         function getRadius(val) {
             var radius = Math.sqrt(val/Math.PI);
@@ -168,7 +167,7 @@
         }
         
         L.control.layers(null, sourcelabels, { collapse:false}).addTo(map);
-        
+//        
 //        var windLayer = L.geoJson(plants, {
 //            pointToLayer: function(feature,latlng) {
 //                return L.circleMarker(latlng, commonStyles);
