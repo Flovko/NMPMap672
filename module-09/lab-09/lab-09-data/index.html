@@ -47,7 +47,7 @@
 
 <body>
     <header>
-        <h1>Nuclear, Hydro, and Solar Power Production Plants</h1>
+        <h1>Nuclear, Solar, and Hydro Power Production Plants</h1>
         
     </header>
 
@@ -55,7 +55,7 @@
 
     <footer>
         <p>Map authored by<br> Francisco Lovko<br> For: MAPS672</p>
-        <p>The above map displays power plants that are fueled by Hydro, Nuclear, and Solar energy to produce electricity.  The circles are proportioned based on the power output of each plant in Kilowatts.  The larger the circle the more power is being produced at that site.   If the viewer clicks on the map it will show all the power plants located within 500 Kilometers from where the user clicked on the map.  Additionally, once the map has been filtered by proximity the user can click on a point to display point specific information.  The map can be further filtered by fuel source.  On the top right corner of the map the viewer can check or uncheck the fuel sources they wish to display or omit</p>
+        <p>The above map displays power plants that are fueled by Nuclear, Solar, and Hydro energy to produce electricity.  The circles are proportioned based on the power output of each plant in Kilowatts.  The larger the circle the more power is being produced at that site.   If the viewer clicks on the map it will show all the power plants located within 500 Kilometers from where the user clicked on the map.  Additionally, once the map has been filtered by proximity the user can click on a point to display point specific information.  The map can be further filtered by fuel source.  On the top right corner of the map the viewer can check or uncheck the fuel sources they wish to display or omit. </p>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -136,9 +136,8 @@
             var plantName = layer.feature.properties.plant_name;
             var fuelSource = layerInfo[l].source;        
                     
-            var popup = "<b>" + plantName + "</b><br>" + "<b>" + 
-                        fuelSource +"</b><br>" + 
-                        "I am <b>"+distance.toLocaleString()+
+            var popup = "<b>" + plantName + "</b><br>" + "Fuel Source:" + " " +  
+                        "<b>" + fuelSource +"</b><br>" + "I am <b>"+distance.toLocaleString()+
                         "km</b><br> from the click point."
                     
                     layer.bindPopup(popup);
