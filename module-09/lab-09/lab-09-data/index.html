@@ -47,15 +47,15 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Nuclear, Hydro, and Solar Power Production Plants</h1>
+        
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by<br> Francisco Lovko<br> For: MAPS672</p>
+        <p>The above map displays power plants that are fueled by Hydro, Nuclear, and Solar energy to produce electricity.  The circles are proportioned based on the power output of each plant in Kilowatts.  The larger the circle the more power is being produced at that site.   If the viewer clicks on the map it will show all the power plants located within 500 Kilometers from where the user clicked on the map.  Additionally, once the map has been filtered by proximity the user can click on a point to display point specific information.  The map can be further filtered by fuel source.  On the top right corner of the map the viewer can check or uncheck the fuel sources they wish to display or omit</p>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -118,20 +118,11 @@
             return radius * .8;
         } 
         
-        var sourcelabels = {
-            "<b style='color:#9ffb1b'>Nuclear</b>": geoJsonLayers.nuclearLayer,
-            "<b style='color:#fbb034'>Solar</b>": geoJsonLayers.solarLayer,
-            "<b style='color:#3807d6'>Hydro</b>": geoJsonLayers.hydroLayer
-        }
-        
-        L.control.layers(null, sourcelabels, { collapse:false}).addTo(map);
-        
-        
         map.on('click', function(e) {
             for(var l in geoJsonLayers) { 
                 geoJsonLayers[l].eachLayer(function(layer) {
-                var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
-
+                var distance = e.latlng.distanceTo(layer.getLatLng())/1000
+                                                                            
                 if(distance > 500) {
                     layer.setStyle({
                         stroke: false,
@@ -143,20 +134,26 @@
                         fill: true  
             });  
             var plantName = layer.feature.properties.plant_name;
-//            var fuelSource = layer.layerInfo[layer].source;        
+            var fuelSource = layerInfo[l].source;        
                     
             var popup = "<b>" + plantName + "</b><br>" + "<b>" + 
-                        'fuelSource' +"</b><br>" + 
+                        fuelSource +"</b><br>" + 
                         "I am <b>"+distance.toLocaleString()+
                         "km</b><br> from the click point."
-                    console.log(layer.feature.properties.fuel_source);
+                    
                     layer.bindPopup(popup);
                     }
                 });
             }
         });
       
-     
+        var sourcelabels = {
+            "<b style='color:#9ffb1b'>Nuclear</b>": geoJsonLayers.nuclearLayer,
+            "<b style='color:#fbb034'>Solar</b>": geoJsonLayers.solarLayer,
+            "<b style='color:#3807d6'>Hydro</b>": geoJsonLayers.hydroLayer
+        }
+        
+        L.control.layers(null, sourcelabels, { collapse:false}).addTo(map);
   
     </script>
 
