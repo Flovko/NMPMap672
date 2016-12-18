@@ -85,6 +85,13 @@
             fillOpacity: .8    
         }
         
+        var radiusCircle = L.circle([0,0], 500000, {
+            fillColor: false,
+            fillOpacity: .1,
+            stroke: false,
+            weight: 3,   
+        }).addTo(map);
+        
           var layerInfo = {
             nuclearLayer: {source:"Nuclear", color:'#9ffb1b'},
             solarLayer: {source:"Solar", color:'#fbb034'},
@@ -119,10 +126,11 @@
         } 
         
         map.on('click', function(e) {
+            radiusCircle.setStyle({fillColor: "white"}).setLatLng(e.latlng);
             for(var l in geoJsonLayers) { 
                 geoJsonLayers[l].eachLayer(function(layer) {
                 var distance = e.latlng.distanceTo(layer.getLatLng())/1000
-                                                                            
+                                                                                  
                 if(distance > 500) {
                     layer.setStyle({
                         stroke: false,
