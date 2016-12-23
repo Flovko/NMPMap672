@@ -19,46 +19,46 @@
 			font-family: "Noto Sans", sans-serif;
 			color: #3d3d3d;
 		}
-		
+
 		section {
 			width: 960px;
 			margin: 20px auto;
 		}
-		
+
 		h1 {
 			width: 960px;
 			margin: 20px auto;
 			font-family: "Lora", serif;
 			letter-spacing: .04em;
 		}
-		
+
 		h2 {
 			font-family: "Lora", serif;
 			letter-spacing: .04em;
 		}
-		
+
 		p {
 			font-size: 1em;
 			line-height: 1.5em;
 		}
-		
+
 		a {
-			color: #1ABC9C;  
+			color: #1ABC9C;
 			font-weight: bold;
 			text-decoration: none;
 		}
-		
+
 		a:hover {
 			text-decoration: underline;
 		}
-		
+
 		#map {
 			width: 960px;
 			height: 540px;
 			margin: 10px auto;
 			border: 2px solid #d3d3d3;
 		}
-		
+
 		button {
 			font-size: 1.2em;
 			/*            margin: 10px auto;*/
@@ -80,7 +80,7 @@
 
 		<p>Map authored by,<br> Francisco Lovko<br> Maps672</p>
 
-		<p>The hyperlinks in this paragraph will take the reader directly to the data sources used to author this map.  The plotted points include <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Argyle town, Washington County, New York/ALL">Argyle</a>, New York, <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Huntington Beach city, California/ALL">Huntington Beach</a>, California and <a href=" http://www.localgovernment.co.za/metropolitans/view/6/City-of-Cape-Town-Metropolitan-Municipality#overview">Cape Town</a>, South Africa.</p> 
+		<p>The hyperlinks in this paragraph will take the reader directly to the data sources used to author this map.  The plotted points include <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Argyle town, Washington County, New York/ALL">Argyle</a>, New York, <a href="http://factfinder.census.gov/bkmk/cf/1.0/en/place/Huntington Beach city, California/ALL">Huntington Beach</a>, California and <a href=" http://www.localgovernment.co.za/metropolitans/view/6/City-of-Cape-Town-Metropolitan-Municipality#overview">Cape Town</a>, South Africa.</p>
 
 	</section>
 
@@ -106,77 +106,64 @@
 
 		// adds these tiles to the map
 		map.addLayer(tiles);
-            
-           	 var cities = ["Argyle", "Huntington Beach", "Cape Town"]; // write 3 city names as Strings within an array
-              	  console.log('cities');
-            
-            	var cityCoords = [
-             	 [43.2379, -73.4915],
-              	 [33.6603, -117.9992],
-             	 [-33.9249, 18.4241]
-            	]; 
-            
-             	 console.log('2DArray') // write a two-dimensional array of the coordinates for each city
-		
-           	 var cityPops = [3782, 189992, 3740026]; // write the populations of the 3 cities as Numbers within an array;
-		      
-           	 var cityAreas = [150, 82.6 ,2440]; // write the areas in KM sqared of the 3 cities as Numbers within an array;
-        
+
+   	 var cities = ["Argyle", "Huntington Beach", "Cape Town"]; // write 3 city names as Strings within an array
+      	  console.log('cities');
+
+    	var cityCoords = [
+     	 [43.2379, -73.4915],
+      	 [33.6603, -117.9992],
+     	 [-33.9249, 18.4241]
+    	];
+
+     	 console.log('2DArray') // write a two-dimensional array of the coordinates for each city
+
+   	 var cityPops = [3782, 189992, 3740026]; // write the populations of the 3 cities as Numbers within an array;
+
+   	 var cityAreas = [150, 82.6 ,2440]; // write the areas in KM sqared of the 3 cities as Numbers within an array;
+
 		 var button = document.getElementById("map-cities");
 		 button.addEventListener("click", function () {
-			var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
-			//console.log(units);
-			
-              mapCities(units);// call a function named mapCities, and send the units variable as an argument
+			 		do{
+							var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+					} while(units != 'miles' && units != 'km')
+
+
+					mapCities(units);// call a function named mapCities, and send the units variable as an argument
 		}); // addEventListener callback function ends here
-		
-        function mapCities(units){     
-            
+
+        function mapCities(units){
+
         // write a function here named mapCities so that it accepts units as a parameter
              for(var i = 0; i < cities.length; i++){
-               
-                // console.log("start: " + i);  debugging error
-                 
-                console.log(cities);
-                
-                var pops = cityPops[i];
-             
-                var area = cityAreas[i]; 
-                  
-                var density =  calcPopDensity(pops, area, units); // calling CalcPopDensity funciton
-                 
-                var densityRounded = density.toFixed(2) 
-                 
+
+                var density =  calcPopDensity(cityPops[i], cityAreas[i], units); // calling CalcPopDensity funciton
+
+
                 var popup = "<b>" + cities[i] + "</b><br>" +
-                    "<b>Population Density per"+ " " + units + '<sup>2</sup>' + ":" + " " + densityRounded; 
-              
+                    "<b>Population Density per"+ " " + units + '<sup>2</sup>' + ":" + " " + density.toFixed(2);
+
                 L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);
-                  
-                // console.log("end: " + i);
-                
-                console.log(density);
-                 
+
              }
         }
 
         function calcPopDensity(pops, area, units) {
-            
-            if(units === "km"){
-                density;
-            } else if(units === "miles"){
+
+            if(units === "miles"){
                 area = area * 0.386102;
             }
-            
-            var density = (pops / area);
-                      
+
+            var density = pops / area;
+
             return density;
         }
-           
-      // write a function named calcPopDensity here so that it accepts a 
-		// single city's population, area, and the value for units 
+
+      // write a function named calcPopDensity here so that it accepts a
+		// single city's population, area, and the value for units
 		// determined by the user
-    
+
 	</script>
 
 </body>
