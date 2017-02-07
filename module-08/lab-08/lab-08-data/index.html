@@ -60,7 +60,7 @@
         <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
         <script src="power-plants.js"></script>
         <script>
-        
+
         var map = L.map('map', {
           center: [36,-94],
           zoom: 4,
@@ -73,10 +73,10 @@
         });
 
         tiles.addTo(map);
-            
-        plants.features.sort(function(a, b) { 
+
+        plants.features.sort(function(a, b) {
             return b.properties.capacity_mw - a.properties.capacity_mw;
-        });    
+        });
 
         L.geoJson(plants, {
             pointToLayer: function(feature,latlng) {
@@ -86,50 +86,61 @@
                 weight: 1,
                 fillColor: '#06dbcb',
                 fillOpacity: .8,
-                radius: getRadius(feature.properties.capacity_mw) // returns get radius function        
+                radius: getRadius(feature.properties.capacity_mw) // returns get radius function
                 });
             },
-            
+
             filter: function(feature, layer) {
-                if(feature.properties.fuel_source.Wind || 
+                if(feature.properties.fuel_source.Wind ||
                     feature.properties.fuel_source['Natural Gas']  &&
-                    feature.properties.fuel_source.Petroleum) 
+                    feature.properties.fuel_source.Petroleum)
                 return feature;
-                },                
-        
+                },
+
         onEachFeature : function(feature, layer) {
-//           console.log(layer);   
+//           console.log(layer);
             var plantName = feature.properties.plant_name;
             var output = feature.properties.capacity_mw;
+            var windOutput = feature.properties.fuel_source.Wind;
             var naturalGasOutput = feature.properties.fuel_source['Natural Gas'];
             var petroleumOutput = feature.properties.fuel_source.Petroleum;
-            
-            var popup = "<b>" + plantName + "</b><br>" + output + " " +"MW" +
-                "<br><b>" + "Natural Gas:" + "</b>" + " " + naturalGasOutput + 
-                " " + "MW" + "<br><b>" + "Petroleum:" + " " + "</b>" + 
-                petroleumOutput + " " + "MW";
-            
+
+            var popup = "<b>" + plantName + "</b><br>" + output + " MW";
+
+            // if windOutput is true (or not undefined)
+            if(windOutput) {
+              popup += "<br><b>Wind: </b>" + " " + windOutput; // add to popup
+            }
+            // same with naturalGasOutput
+            if(naturalGasOutput) {
+              popup += "<br><b>" + "Natural Gas: </b>" + " " + naturalGasOutput + " MW";;
+            }
+            // and petroleumOutput
+            if(petroleumOutput) {
+              popup += "<br><b>Petroleum: </b>" + petroleumOutput + " MW";
+            }
+
             layer.bindPopup(popup);
-            
+
             layer.on('mouseover', function() {
                 layer.setStyle({
                     fillColor:'#0b8ff2'
                 })
             });
-              
+
             layer.on('mouseout', function() {
                 layer.setStyle({
                     fillColor: '#06dbcb'
                     })
                 });
             },
-            
-        }).addTo(map)    
+
+        }).addTo(map)
         function getRadius(area) {
             var radius = Math.sqrt(area/Math.PI);
             return radius * .7;
-        }        
-        
+        }
+
     </script>
 
 </body>
